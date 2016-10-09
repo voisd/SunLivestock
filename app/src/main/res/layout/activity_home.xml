@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs_tl"
+            android:layout_width="fill_parent"
+            android:layout_height="47dip"
+            android:background="@color/white"
+            android:layout_alignParentBottom="true"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/white"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/theme_color"
+            app:tabTextColor="@color/text_color_1" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray1"
+            android:layout_below="@+id/common_toolbar"/>
+
+        <com.voisd.sun.view.NoScrollViewpager
+            android:background="@color/white"
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/common_toolbar"
+            android:layout_marginBottom="1dp"
+            android:layout_above="@+id/tabs_tl"/>
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_gravity="right"
+        android:fitsSystemWindows="true"
+        android:choiceMode="singleChoice"/>
+
+</android.support.v4.widget.DrawerLayout>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.voisd.sun.view.SquareLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="2dip">
+
+        <RelativeLayout
+            android:id="@+id/card_view_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            >
+
+            <ImageView
+                android:id="@+id/local_image_iv"
+                android:layout_width="180dip"
+                android:layout_height="180dip"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_launcher" />
+
+            <CheckedTextView
+                android:id="@+id/checkTextViewFromMediaChooserGridItemRowView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dip"
+                android:paddingRight="12dip"
+                android:paddingLeft="20dip"
+                android:paddingBottom="25dip"
+                android:layout_alignParentRight="true"
+                android:checkMark="@drawable/selectimages_check_selector"
+                android:gravity="center"
+                />
+
+            <RelativeLayout
+                android:id="@+id/camera_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                android:layout_centerInParent="true">
+
+                <ImageView
+                    android:id="@+id/camera_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_launcher" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/camera_iv"
+                    android:layout_marginTop="10dip"
+                    android:text="拍摄照片" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    <!--</android.support.v7.widget.CardView>-->
+
+</com.voisd.sun.view.SquareLayout>

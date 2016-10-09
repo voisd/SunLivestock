@@ -1,0 +1,81 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+    useLibrary 'org.apache.http.legacy'
+    defaultConfig {
+        applicationId "com.voisd.sun"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+    }
+
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile name:'SMSSDK-2.1.2',ext:'aar'
+    compile name:'SMSSDKGUI-2.1.2',ext:'aar'
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:cardview-v7:23.1.1'
+    compile 'com.android.support:appcompat-v7:23.2.1'
+    compile 'com.android.support:design:23.2.1'
+    //async 做网络请求
+    compile 'com.loopj.android:android-async-http:1.4.9'
+    //OKhttp 做上传
+    compile 'com.squareup.okhttp:okhttp:2.4.0'
+    compile 'com.squareup.okio:okio:1.5.0'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
+    //广播
+    compile 'de.greenrobot:eventbus:2.4.0'
+    //View注入框架
+    compile 'com.jakewharton:butterknife:6.1.0'
+    //状态栏沉浸开源库
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    //第三方弹出框
+    compile 'com.afollestad.material-dialogs:commons:0.8.6.0'
+    compile 'com.afollestad.material-dialogs:core:0.8.6.0'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    //图片加载
+    compile 'com.squareup.picasso:picasso:2.3.2'
+    compile 'com.voisd.vanimator:vanimator:1.0.5'
+    compile 'com.diegocarloslima:byakugallery:0.1.+@aar'
+    compile files('libs/gson-2.2.3.jar')
+    compile files('libs/bcprov-jdk15-133.jar')
+    compile files('libs/SocialSDK_QQZone_3.jar')
+    compile files('libs/SocialSDK_umengqq.jar')
+    compile files('libs/SocialSDK_umengsina.jar')
+    compile files('libs/SocialSDK_umengwx.jar')
+    compile files('libs/SocialSDK_WeiXin_2.jar')
+    compile files('libs/umeng_social_apiv6.0.0.jar')
+    compile files('libs/umeng_social_netv6.0.0.jar')
+    compile files('libs/umeng_social_viewv6.0.0.jar')
+    compile files('libs/httpmime-4.1.3.jar')
+    compile 'com.fabiendevos:nanotasks:1.1.0'
+    compile files('libs/MobTools-2016.0921.1136.jar')
+    compile files('libs/MobCommons-2016.0921.1136.jar')
+
+}
+
+repositories{
+   flatDir{
+       dirs 'libs'
+   }
+}

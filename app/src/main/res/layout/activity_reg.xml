@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/common_toolbar"/>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="48dp"
+       android:layout_marginLeft="12dp"
+       android:layout_marginRight="12dp"
+       android:orientation="horizontal">
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="match_parent"
+           android:gravity="center_vertical"
+           android:textSize="16sp"
+           android:textColor="@color/text_color_1"
+           android:text="账号:"/>
+
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+           <View
+               android:layout_width="match_parent"
+               android:layout_height="0.5dp"
+               android:layout_alignParentBottom="true"
+               android:layout_marginLeft="12dp"
+               android:background="@color/gray1"/>
+           <EditText
+               android:id="@+id/reg_phone_et"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:background="@null"
+               android:layout_marginLeft="12dp"
+               android:textSize="16sp"
+               android:textColor="@color/text_color"
+               android:hint="请输入您的手机号"
+               android:maxLength="11"
+               android:gravity="center_vertical"/>
+
+       </RelativeLayout>
+
+
+   </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textSize="16sp"
+            android:textColor="@color/text_color_1"
+            android:text="验证:"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/reg_huoqu_cd"
+                style="@style/Commom.CardView"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                app:cardBackgroundColor="@color/theme_color"
+                app:cardCornerRadius="3dip">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:padding="4dp"
+                    android:textColor="@color/white"
+                    android:text="获取验证码"/>
+
+            </android.support.v7.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignParentBottom="true"
+                android:layout_toLeftOf="@+id/reg_huoqu_cd"
+                android:paddingRight="4dp"
+                android:layout_marginLeft="12dp"
+                android:background="@color/gray1"/>
+            <EditText
+                android:id="@+id/reg_ems_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/reg_huoqu_cd"
+                android:paddingRight="4dp"
+                android:layout_marginLeft="12dp"
+                android:textSize="16sp"
+                android:textColor="@color/text_color"
+                android:hint="请获取短信验证码"
+                android:maxLength="4"
+                android:background="@null"
+                android:gravity="center_vertical"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textSize="16sp"
+            android:textColor="@color/text_color_1"
+            android:text="密码:"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:background="@color/gray1"/>
+            <EditText
+                android:id="@+id/reg_password_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:layout_marginLeft="12dp"
+                android:textSize="16sp"
+                android:textColor="@color/text_color"
+                android:hint="请输入您的密码"
+                android:password="true"
+                android:maxLength="16"
+                android:gravity="center_vertical"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textSize="16sp"
+            android:textColor="@color/text_color_1"
+            android:text="昵称:"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/reg_suiji_img"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_dice"/>
+
+            <View
+                android:layout_toLeftOf="@+id/reg_suiji_img"
+                android:paddingRight="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:background="@color/gray1"/>
+            <EditText
+                android:id="@+id/reg_name_et"
+                android:layout_toLeftOf="@+id/reg_suiji_img"
+                android:paddingRight="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:maxLength="8"
+                android:layout_marginLeft="12dp"
+                android:textSize="16sp"
+                android:textColor="@color/text_color"
+                android:hint="请输入您的昵称"
+                android:gravity="center_vertical"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/reg_submit_cd"
+        style="@style/Commom.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="48dp"
+        app:cardBackgroundColor="@color/gray1"
+        app:cardCornerRadius="3dip">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:text="注册"/>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
