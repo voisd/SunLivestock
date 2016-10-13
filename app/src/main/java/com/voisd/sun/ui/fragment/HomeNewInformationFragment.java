@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.voisd.sun.R;
+import com.bk886.njxzs.R;
 import com.voisd.sun.api.ApiContants;
 import com.voisd.sun.been.Category;
 import com.voisd.sun.been.News;
@@ -100,7 +100,7 @@ public class HomeNewInformationFragment extends BaseFragment
 
     @Override
     protected void onUserVisible() {
-
+        ((HomeActivity)getActivity()).setDrawerLayout(true);
     }
 
     @Override

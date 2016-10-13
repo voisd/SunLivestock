@@ -15,9 +15,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.loopj.android.http.RequestParams;
-import com.voisd.sun.R;
+import com.bk886.njxzs.R;
 import com.voisd.sun.api.ApiContants;
 import com.voisd.sun.been.CommentList;
+import com.voisd.sun.been.Login;
 import com.voisd.sun.been.PostResult;
 import com.voisd.sun.been.SubCommentList;
 import com.voisd.sun.common.Contants;
@@ -92,6 +93,8 @@ public class NewsReplyChildsListActivity extends BaseActivity implements
     private HeaderAndFooterRecyclerViewAdapter adapter;
     private ExStaggeredGridLayoutManager staggeredGridLayoutManager;
     private List<SubCommentList> mResultList = new ArrayList<SubCommentList>();
+
+    private List<SubCommentList> mResultListReport = new ArrayList<SubCommentList>();
 
     private IRecyclerViewPresenter iRecyclerViewPresenter = null;
 
@@ -303,8 +306,19 @@ public class NewsReplyChildsListActivity extends BaseActivity implements
     @Override
     public void getRequestData(int eventTag, String result) {
         if(eventTag==ApiContants.EventTags.REPORTCOMMENT_DO){
-            showToastLong(HttpStatusUtil.getStatusDate(result));
-            firstRefresh();
+            JsonHelper<SubCommentList> jsonHelper = new JsonHelper<SubCommentList>(SubCommentList.class);
+            SubCommentList subCommentList = jsonHelper.getData(result, "data");
+            if(subCommentList!=null){
+                mResultListReport.add(subCommentList);
+                mResultList.add(subCommentList);
+                adapter.notifyDataSetChanged();
+                if (mResultList.size() >= Contants.Request.PAGE_NUMBER) {
+                    RecyclerViewUtils.setFooterView(recyclerView, loadMoreView);
+                }
+                recyclerView.scrollToPosition(mResultList.size());
+            }
+            showToastLong(HttpStatusUtil.getStatusMsg(result));
+
         }
     }
 
@@ -413,6 +427,11 @@ public class NewsReplyChildsListActivity extends BaseActivity implements
         }
         if(commentList!=null) {
             RecyclerViewUtils.setHeaderView(recyclerView, topView);
+        }
+
+        if(commentList!=null){
+
+            topHolder.replyReplyTv.performClick();
         }
     }
 

@@ -39,6 +39,8 @@ public class ApiContants {
         public final static String USERREGISTER = url + "userRegister.do";
 
         public final static String CATEGORY_DO = url + "category.do";
+
+        public final static String UPDATEPWD_DO = url + "updatePwd.do"; //修改密码
     }
 
     public static final class EventTags {
@@ -76,6 +78,7 @@ public class ApiContants {
 
         public final static int CATEGORY_DO = BEGIN_EVENT + 16; //分类
 
+        public final static int UPDATEPWD = BEGIN_EVENT + 17; //修改密码
 
 
     }

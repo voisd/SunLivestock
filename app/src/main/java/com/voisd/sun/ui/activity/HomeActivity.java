@@ -22,7 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
-import com.voisd.sun.R;
+import com.bk886.njxzs.R;
 import com.voisd.sun.api.ApiContants;
 import com.voisd.sun.been.Category;
 import com.voisd.sun.been.Login;
@@ -122,10 +122,10 @@ public class HomeActivity extends BaseActivity implements ICommonViewUi {
     private void initList(){
         if(categoryList==null)
             return;
-        DrawerLayout.LayoutParams lp =  (DrawerLayout.LayoutParams)listView.getLayoutParams();
-        lp.setMargins(0,CommonUtils.getSysHeight(mContext),0,0);
-        lp.gravity = Gravity.RIGHT;
-        listView.setLayoutParams(lp);
+//        DrawerLayout.LayoutParams lp =  (DrawerLayout.LayoutParams)listView.getLayoutParams();
+//        lp.setMargins(0,CommonUtils.getSysHeight(mContext),0,0);
+//        lp.gravity = Gravity.RIGHT;
+//        listView.setLayoutParams(lp);
         Category category = new Category();
         category.setCid("0");
         category.setName("农家小助手");
@@ -152,6 +152,14 @@ public class HomeActivity extends BaseActivity implements ICommonViewUi {
             dimissProgress();
         }
         isLoad = status;
+    }
+
+    public void setDrawerLayout(boolean Status){
+        if(Status){
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        }else {
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        }
     }
 
     public class MyHomeTabAdapter extends FragmentPagerAdapter {
@@ -221,7 +229,9 @@ public class HomeActivity extends BaseActivity implements ICommonViewUi {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){
-            if(viewpager.getCurrentItem()!=0){
+            if(drawerLayout.isDrawerOpen(Gravity.RIGHT)){
+                drawerLayout.closeDrawer(Gravity.RIGHT);
+            }else if(viewpager.getCurrentItem()!=0){
                 viewpager.setCurrentItem(0);
             }else if((System.currentTimeMillis()-exitTime) > 2000){
                 Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();

@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.voisd.sun.R;
+import com.bk886.njxzs.R;
 import com.voisd.sun.been.News;
 import com.voisd.sun.listeners.IRecyclerViewItemListener;
 import com.voisd.sun.utils.PictureUtil;
@@ -51,7 +51,8 @@ public class HomeNewInformationAdapter extends RecyclerView.Adapter {
         viewHolder.newsTitleTv.setText(notes.get(position).getTitle());
         viewHolder.newsContentTv.setText(notes.get(position).getBrief());
         viewHolder.newsTimeTv.setText(notes.get(position).getTime());
-        viewHolder.newsNumberTv.setText(notes.get(position).getCommentCount()+"条评论");
+        String number = StringHelper.isEmpty(notes.get(position).getCommentCount())?"0":notes.get(position).getCommentCount();
+        viewHolder.newsNumberTv.setText(number+"条评论");
         if(StringHelper.isEmpty(notes.get(position).getImgUrl())){
             viewHolder.newsShowImg.setVisibility(View.GONE);
         }else{

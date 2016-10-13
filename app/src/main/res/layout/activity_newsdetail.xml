@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         layout="@layout/common_toolbar"/>
 
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="fill_parent"
@@ -24,36 +25,6 @@
             android:layout_height="match_parent"
             android:padding="4dip">
 
-            <TextView
-                android:id="@+id/news_title_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/text_color"/>
-
-            <TextView
-                android:id="@+id/news_time_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                android:textColor="@color/text_color_2"
-                android:layout_below="@+id/news_title_tv"/>
-
-            <TextView
-                android:id="@+id/news_read_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                android:textColor="@color/text_color_2"
-                android:layout_below="@+id/news_title_tv"
-                android:layout_alignParentRight="true"/>
-
             <RelativeLayout
                 android:id="@+id/bottom_layout"
                 android:layout_width="match_parent"
@@ -63,9 +34,8 @@
 
                 <ImageView
                     android:id="@+id/news_share_img"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:padding="6dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:tint="@color/theme_color"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
@@ -74,25 +44,44 @@
 
                 <ImageView
                     android:id="@+id/news_collect_img"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:padding="6dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:tint="@color/theme_color"
                     android:layout_toLeftOf="@+id/news_share_img"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="24dp"
                     android:src="@drawable/ic_star"/>
 
-                <ImageView
+                <RelativeLayout
                     android:id="@+id/news_comments_img"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:padding="6dp"
-                    android:tint="@color/theme_color"
-                    android:layout_toLeftOf="@+id/news_collect_img"
-                    android:layout_centerVertical="true"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
                     android:layout_marginRight="24dp"
-                    android:src="@drawable/ic_comments"/>
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/news_collect_img">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:tint="@color/theme_color"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/ic_comments"/>
+
+                    <TextView
+                        android:id="@+id/news_comments_tv"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:visibility="gone"
+                        android:background="@drawable/icon_unread_bg"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"/>
+
+                </RelativeLayout>
+
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/news_reply_cardView"
@@ -117,11 +106,12 @@
             </RelativeLayout>
 
             <com.voisd.sun.view.MyWebView
-                android:id="@+id/news_webview"
-                android:layout_below="@+id/news_time_tv"
+                android:id="@+id/webView"
                 android:layout_above="@+id/bottom_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent">
+
+            </com.voisd.sun.view.MyWebView>
 
         </RelativeLayout>
 

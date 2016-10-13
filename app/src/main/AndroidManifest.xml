@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.voisd.sun">
+    package="com.bk886.njxzs">
 
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" ></uses-permission>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" ></uses-permission>
@@ -52,7 +52,9 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".MyApplication"
+        android:name="com.voisd.sun.MyApplication"
+        android:largeHeap="true"
+        android:screenOrientation="portrait"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name="com.voisd.sun.ui.activity.HomeActivity">
             <intent-filter>
@@ -62,31 +64,37 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.activity.NewsDetailActivity"
+        <activity android:name="com.voisd.sun.ui.activity.NewsDetailActivity"
             android:windowSoftInputMode="adjustResize"/>
 
-        <activity android:name=".ui.activity.LoginActivity"
-            android:windowSoftInputMode="stateVisible|adjustPan"/>
+        <activity android:name="com.voisd.sun.ui.activity.LoginActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
 
-        <activity android:name=".ui.activity.NewsReplyListActivity"/>
+        <activity android:name="com.voisd.sun.ui.activity.NewsReplyListActivity"/>
 
-        <activity android:name=".ui.activity.NewsReplyChildsListActivity"/>
+        <activity android:name="com.voisd.sun.ui.activity.NewsReplyChildsListActivity"/>
 
-        <activity android:name=".ui.activity.MyCollecdActivity"/>
+        <activity android:name="com.voisd.sun.ui.activity.MyCollecdActivity"/>
 
-        <activity android:name=".ui.activity.MyInfoActivity"/>
+        <activity android:name="com.voisd.sun.ui.activity.MyInfoActivity"/>
 
-        <activity android:name=".ui.activity.BrowserCompareImageActivity"/>
+        <activity android:name="com.voisd.sun.ui.activity.BrowserCompareImageActivity"/>
 
-        <activity android:name=".ui.activity.RegActivity"/>
+        <activity android:name="com.voisd.sun.ui.activity.RegActivity"/>
 
-        <activity android:name=".wxapi.SelectImageActivity"/>
+        <activity android:name="com.voisd.sun.wxapi.SelectImageActivity"/>
 
-        <activity android:name=".ui.activity.AboutActivity"/>
+        <activity android:name="com.voisd.sun.ui.activity.AboutActivity"/>
+
+        <activity android:name="com.voisd.sun.ui.activity.PassWorkActivity"/>
+
+        <activity android:name="com.voisd.sun.ui.activity.PassWorkSubmitActivity"/>
 
         <!-- =================分享-->
         <activity
-            android:name=".wxapi.WXEntryActivity"
+            android:name="com.voisd.sun.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"

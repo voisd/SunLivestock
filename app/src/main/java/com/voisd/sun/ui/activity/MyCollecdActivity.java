@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
-import com.voisd.sun.R;
+import com.bk886.njxzs.R;
 import com.voisd.sun.api.ApiContants;
 import com.voisd.sun.been.News;
 import com.voisd.sun.common.Contants;

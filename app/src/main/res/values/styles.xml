@@ -21,6 +21,11 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+    <style name="Toast2">
+
     </style>
 
     <style name="MaterialDialogSheet" parent="@android:style/Theme.Dialog">

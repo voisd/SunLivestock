@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.voisd.sun.R;
+import com.bk886.njxzs.R;
 import com.voisd.sun.been.SubCommentList;
 import com.voisd.sun.listeners.IRecyclerViewItemListener;
 import com.voisd.sun.utils.PictureUtil;
@@ -48,7 +48,7 @@ public class NewsReplyChildsListAdapter extends RecyclerView.Adapter {
         viewHolder.replyUsernameTv.setText(notes.get(position).getUser().getName());
         viewHolder.replyContentTv.setText(notes.get(position).getContent());
         viewHolder.replyTimeTv.setText(TimeUtils.fromLongToDate(notes.get(position).getReport_time()+"000"));
-
+        PictureUtil.load(mContext, viewHolder.replyUserImg, notes.get(position).getUser().getAvatar());
         for(SubCommentList subCommentList:notes){
             if(notes.get(position).getParent_id().equals(subCommentList.getComment_id())){
                 viewHolder.replyUsernameTv.setText(notes.get(position).getUser().getName() + " 回复 "

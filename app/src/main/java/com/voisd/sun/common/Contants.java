@@ -2,7 +2,7 @@ package com.voisd.sun.common;
 
 import android.os.Environment;
 
-import com.voisd.sun.R;
+import com.bk886.njxzs.R;
 
 /**
  * 常量
@@ -86,6 +86,17 @@ public class Contants {
         public final static String Token = "token"; //个人token
         public final static String Avatar = "avatar"; //个人头像
 
+    }
+
+    public static final class SMSS{
+        //此APPKEY仅供测试使用，且不定期失效，请到mob.com后台申请正式APPKEY
+        public final static String APPKEY_TEST = "f3fc6baa9ac4";
+        // 填写从短信SDK应用后台注册得到的APPSECRET
+        public final static String APPSECRET_TEST = "7f3dedcb36d92deebcb373af921d635a";
+
+        //正式版本
+        public final static String APPKEY = "17b125854afcc";
+        public final static String APPSECRET = "d609da9e9cbfb9107361cb3b4d558c5c";
     }
 
 

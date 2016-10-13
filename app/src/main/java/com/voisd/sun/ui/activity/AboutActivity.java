@@ -6,7 +6,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.voisd.sun.R;
+import com.bk886.njxzs.R;
 import com.voisd.sun.ui.base.BaseActivity;
 
 import butterknife.ButterKnife;
@@ -56,8 +56,7 @@ public class AboutActivity extends BaseActivity {
                 "\n" +
                 "我们的联系方式\n" +
                 "\n" +
-                "qq:334068482\n" +
-                "QQ群:578598841\n"+
+                "Q群:578598841\n"+
                 "微信:wx334068482";
         contentTv.setText(s);
 

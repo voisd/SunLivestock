@@ -4,7 +4,7 @@ import android.view.View;
 
 
 import com.loopj.android.http.RequestParams;
-import com.voisd.sun.R;
+import com.bk886.njxzs.R;
 import com.voisd.sun.api.ApiContants;
 import com.voisd.sun.loading.ILoadView;
 import com.voisd.sun.presenter.ICommonRequestPresenter;

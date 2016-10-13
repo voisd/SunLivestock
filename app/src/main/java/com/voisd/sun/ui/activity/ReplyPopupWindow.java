@@ -19,7 +19,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.view.ViewGroup.LayoutParams;
 
-import com.voisd.sun.R;
+import com.bk886.njxzs.R;
 import com.voisd.sun.ui.base.BaseActivity;
 import com.voisd.sun.utils.CommonUtils;
 import com.voisd.sun.utils.StringHelper;

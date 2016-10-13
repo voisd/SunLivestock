@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.loopj.android.http.RequestParams;
 import com.rengwuxian.materialedittext.MaterialEditText;
-import com.voisd.sun.R;
+import com.bk886.njxzs.R;
 import com.voisd.sun.api.ApiContants;
 import com.voisd.sun.been.Login;
 import com.voisd.sun.been.NewsDetail;

@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.diegocarloslima.byakugallery.lib.GalleryViewPager;
 import com.diegocarloslima.byakugallery.lib.TouchImageView;
 import com.squareup.picasso.Picasso;
-import com.voisd.sun.R;
+import com.bk886.njxzs.R;
 import com.voisd.sun.common.Contants;
 import com.voisd.sun.ui.base.BaseActivity;
 import com.voisd.sun.utils.FileUtils;

@@ -14,7 +14,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.voisd.sun.R;
+import com.bk886.njxzs.R;
 import com.voisd.sun.ui.base.BaseActivity;
 import com.voisd.sun.utils.StringHelper;
 

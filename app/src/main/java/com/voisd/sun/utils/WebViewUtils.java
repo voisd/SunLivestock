@@ -15,7 +15,7 @@ import com.voisd.sun.view.MyWebView;
  */
 public class WebViewUtils {
 
-    public static void setWebViewSetting(MyWebView mWebView, Activity activity){
+    public static void setWebViewSetting(WebView mWebView, Activity activity){
         mWebView.requestFocus();
         mWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         // mWebView.setInitialScale(50);//为50%，最小缩放等级
@@ -56,7 +56,11 @@ public class WebViewUtils {
         StringBuffer sb=new StringBuffer();
         //添加html
         sb.append("<html><head><meta http-equiv='content-type' content='text/html; charset=utf-8'>");
-        sb.append("<meta charset='utf-8'  content='1'></head><body style='color: black'><p></p>");
+        sb.append("<meta charset='utf-8'  content='1'>" +
+                "<style type=\\\"text/css\\\">img { height: auto; width: auto\\\\9; width:100%%; }\\n " +
+                "a:link {color: #007AFF;text-decoration: none;}\\n a:visited " +
+                "{color: #007AFF;text-decoration: none;}\\na:hover {color: #007AFF; text-decoration: none; }  </style>" +
+                "</head><body style='color: black'><p></p>");
         //
         //< meta http-equiv="refresh" content="time" url="url" >
         //添加文件的内容

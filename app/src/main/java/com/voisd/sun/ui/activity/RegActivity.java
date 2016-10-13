@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
-import com.voisd.sun.R;
+import com.bk886.njxzs.R;
 import com.voisd.sun.api.ApiContants;
 import com.voisd.sun.been.Login;
 import com.voisd.sun.been.Reg;
@@ -95,14 +95,14 @@ public class RegActivity extends BaseActivity implements ICommonViewUi {
 
     private  boolean isReg = false;
 
-    WeakRefHandler weakRefHandler;
+    RegHandler regHandler;
 
     @Override
     protected void initViewsAndEvents() {
         setToolbarTitle("用户注册");
         iCommonRequestPresenter = new CommonRequestPresenterImpl(mContext, this);
-        weakRefHandler = new WeakRefHandler(this);
-        SMSSDK.initSDK(this, "17b125854afcc", "d609da9e9cbfb9107361cb3b4d558c5c");
+        regHandler = new RegHandler(this);
+        SMSSDK.initSDK(this, Contants.SMSS.APPKEY_TEST,  Contants.SMSS.APPSECRET_TEST);
         SMSSDK.registerEventHandler(eh); //注册短信回调
     }
 
@@ -156,6 +156,7 @@ public class RegActivity extends BaseActivity implements ICommonViewUi {
         System.out.println(result);
         switch (eventTag){
             case ApiContants.EventTags.CHECKPHONE:
+
                 SMSSDK.getVerificationCode("86", regPhoneEt.getText().toString().trim(), new OnSendMessageHandler() {
                     @Override
                     public boolean onSendMessage(String s, String s1) {
@@ -199,12 +200,12 @@ public class RegActivity extends BaseActivity implements ICommonViewUi {
                 if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                     //提交验证码成功
                     System.out.println("提交验证码成功");
-                    weakRefHandler.sendEmptyMessage(2);
+                    regHandler.sendEmptyMessage(2);
                 }else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE){
                     //获取验证码成功
                     System.out.println("获取验证码成功");
                     isReg = true;
-                    weakRefHandler.sendEmptyMessage(1);
+                    regHandler.sendEmptyMessage(1);
 
                 }else if (event ==SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES){
 
@@ -214,7 +215,7 @@ public class RegActivity extends BaseActivity implements ICommonViewUi {
                 Message message = new Message();
                 message.what = 3;
                 message.obj = data;
-                weakRefHandler.sendMessage(message);
+                regHandler.sendMessage(message);
             }
         }
 
@@ -222,10 +223,10 @@ public class RegActivity extends BaseActivity implements ICommonViewUi {
     };
 
 
-    public class WeakRefHandler extends Handler {
+    public class RegHandler extends Handler {
         WeakReference<Context> mWeakContext;
 
-        public WeakRefHandler(Context context) {
+        public RegHandler(Context context) {
             mWeakContext = new WeakReference<Context>(context);
         }
 

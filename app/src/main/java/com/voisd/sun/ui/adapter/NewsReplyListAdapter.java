@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.voisd.sun.R;
+import com.bk886.njxzs.R;
 import com.voisd.sun.been.CommentList;
 import com.voisd.sun.listeners.IRecyclerViewItemListener;
 import com.voisd.sun.utils.PictureUtil;

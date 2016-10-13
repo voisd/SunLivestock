@@ -11,8 +11,10 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
@@ -24,7 +26,7 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
-import com.voisd.sun.R;
+import com.bk886.njxzs.R;
 import com.voisd.sun.common.Contants;
 import com.voisd.sun.ui.TestActivity;
 import com.voisd.sun.utils.CommonUtils;
@@ -115,9 +117,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUi, 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 //            setTranslucentStatus(true);
-            if (topLayout!=null){
-                topLayout.setVisibility(View.VISIBLE);
-            }
+//            if (topLayout!=null){
+//                topLayout.setVisibility(View.VISIBLE);
+//            }
 
         }
 
@@ -208,12 +210,23 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUi, 
 //                topLayout.setVisibility(View.VISIBLE);
 //            }
 
+            //透明状态栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //透明导航栏
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+
         }
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            Window window = getWindow();
+//            window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+//            window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//        }
 
         tintManager = new SystemBarTintManager(this);
         tintManager.setStatusBarTintEnabled(true);
         tintManager.setStatusBarTintResource(colorRes);
-        tintManager.setStatusBarTintColor(android.R.color.black);
+//        tintManager.setStatusBarTintColor(android.R.color.black);
 
         setStatusBarDarkMode(true, this);
     }
@@ -280,11 +293,24 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUi, 
     private void toast(String msg, int duration) {
         if (mToast == null) {
             mToast = Toast.makeText(mContext, msg, duration);
+//            View toastRoot = getLayoutInflater().inflate(R.layout.layout_toast, null);
+            setToastBackground(mToast);
         } else {
             mToast.setText(msg);
             mToast.setDuration(duration);
         }
         mToast.show();
+    }
+
+    public void setToastBackground(Toast toast) {
+        View view = toast.getView();
+        if(view!=null){
+            TextView message=((TextView) view.findViewById(android.R.id.message));
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT);
+            layoutParams.gravity = Gravity.CENTER_VERTICAL;
+            message.setLayoutParams(layoutParams);
+        }
     }
 
     @Override

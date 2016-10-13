@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.loopj.android.http.RequestParams;
-import com.voisd.sun.R;
+import com.bk886.njxzs.R;
 import com.voisd.sun.api.ApiContants;
 import com.voisd.sun.been.Login;
 import com.voisd.sun.been.LoginMsg;
@@ -26,9 +26,11 @@ import com.voisd.sun.presenter.ICommonRequestPresenter;
 import com.voisd.sun.presenter.impl.CommonRequestPresenterImpl;
 import com.voisd.sun.ui.activity.AboutActivity;
 import com.voisd.sun.ui.activity.BrowserCompareImageActivity;
+import com.voisd.sun.ui.activity.HomeActivity;
 import com.voisd.sun.ui.activity.LoginActivity;
 import com.voisd.sun.ui.activity.MyCollecdActivity;
 import com.voisd.sun.ui.activity.MyInfoActivity;
+import com.voisd.sun.ui.activity.PassWorkActivity;
 import com.voisd.sun.ui.activity.PhotoPopupWindow;
 import com.voisd.sun.ui.base.BaseFragment;
 import com.voisd.sun.utils.AES;
@@ -100,13 +102,14 @@ public class HomeMyInfoFragment extends BaseFragment implements PhotoPopupWindow
 
     @Override
     protected void onFirstUserVisible() {
-
+        ((HomeActivity)getActivity()).setDrawerLayout(false);
     }
 
     @Override
     protected void onUserVisible() {
-
+        ((HomeActivity)getActivity()).setDrawerLayout(false);
     }
+
 
     @Override
     protected void onUserInvisible() {
@@ -124,7 +127,7 @@ public class HomeMyInfoFragment extends BaseFragment implements PhotoPopupWindow
         if(LoginMsgHelper.isLogin(mContext)) {
             userNameTv.setText(PreferenceUtils.getPrefString(mContext, Contants.Preference.Name, ""));
             PictureUtil.load(mContext, userHeaderImg, PreferenceUtils.getPrefString(mContext, Contants.Preference.Avatar, ""));
-            userBottomTv.setText("注销账户");
+            userBottomTv.setText("退出账号");
         }else{
             userNameTv.setText("未登录");
             userHeaderImg.setImageDrawable(getResources().getDrawable(R.drawable.ic_user));
@@ -180,7 +183,7 @@ public class HomeMyInfoFragment extends BaseFragment implements PhotoPopupWindow
     }
 
     @OnClick({R.id.user_collect_rel, R.id.user_reply_rel, R.id.user_info_rel,R.id.user_system_rel,
-            R.id.user_header_img,R.id.user_name_tv})
+            R.id.user_header_img,R.id.user_name_tv,R.id.user_pass_rel})
     public void onClickView(View view) {
         if (!LoginMsgHelper.isLogin(mContext)&&view.getId()!=R.id.user_system_rel) {
             CommonUtils.goActivity(mContext, LoginActivity.class, null, false);
@@ -205,6 +208,9 @@ public class HomeMyInfoFragment extends BaseFragment implements PhotoPopupWindow
                 break;
             case R.id.user_name_tv:
                 CommonUtils.goActivity(mContext, LoginActivity.class,null);
+                break;
+            case R.id.user_pass_rel:
+                CommonUtils.goActivity(mContext, PassWorkActivity.class,null);
                 break;
         }
     }

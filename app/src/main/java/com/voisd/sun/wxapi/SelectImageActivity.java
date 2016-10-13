@@ -20,7 +20,7 @@ import android.widget.TextView;
 import com.nanotasks.BackgroundWork;
 import com.nanotasks.Completion;
 import com.nanotasks.Tasks;
-import com.voisd.sun.R;
+import com.bk886.njxzs.R;
 import com.voisd.sun.common.EventBusTags;
 import com.voisd.sun.ui.base.BaseActivity;
 import com.voisd.sun.utils.CommonUtils;

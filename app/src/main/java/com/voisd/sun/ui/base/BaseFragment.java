@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.voisd.sun.R;
+import com.bk886.njxzs.R;
 import com.voisd.sun.common.Contants;
 import com.voisd.sun.utils.CommonUtils;
 import com.voisd.sun.view.iviews.BaseUi;
@@ -40,9 +40,9 @@ public abstract class BaseFragment extends Fragment implements BaseUi, IPageStat
     /**
      * Screen information
      */
-    protected int mScreenWidth = 0;
-    protected int mScreenHeight = 0;
-    protected float mScreenDensity = 0.0f;
+//    protected int mScreenWidth = 0;
+//    protected int mScreenHeight = 0;
+//    protected float mScreenDensity = 0.0f;
 
     /**
      * context
@@ -91,13 +91,13 @@ public abstract class BaseFragment extends Fragment implements BaseUi, IPageStat
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.inject(this, view);
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-
-
-        mScreenDensity = displayMetrics.density;
-        mScreenHeight = displayMetrics.heightPixels;
-        mScreenWidth = displayMetrics.widthPixels;
+//        DisplayMetrics displayMetrics = new DisplayMetrics();
+//        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+//
+//
+//        mScreenDensity = displayMetrics.density;
+//        mScreenHeight = displayMetrics.heightPixels;
+//        mScreenWidth = displayMetrics.widthPixels;
 
         pageStatusIconIv = ButterKnife.findById(view, R.id.page_status_icon_iv);
         pageStatusTextTv = ButterKnife.findById(view, R.id.page_status_text_tv);

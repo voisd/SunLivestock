@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.squareup.picasso.Picasso;
-import com.voisd.sun.R;
+import com.bk886.njxzs.R;
 
 import java.io.File;
 import java.util.List;

@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.voisd.sun.common.Contants;
 import com.voisd.sun.listeners.LoadMoreClickListener;
+import com.bk886.njxzs.R;
 
 /**
  * Created by voisd on 16/5/23.
@@ -29,13 +30,13 @@ public class ILoadViewImpl implements ILoadView, View.OnClickListener{
 
     @Override
     public View inflate() {
-        return LayoutInflater.from(mContext).inflate(com.voisd.sun.R.layout.load_more_item, null);
+        return LayoutInflater.from(mContext).inflate(R.layout.load_more_item, null);
     }
 
     @Override
     public void showLoadingView(View parentView) {
-        ProgressBar progressBar = (ProgressBar) parentView.findViewById(com.voisd.sun.R.id.progressbar_moredata);
-        TextView loadingTv = (TextView) parentView.findViewById(com.voisd.sun.R.id.tip_text_layout);
+        ProgressBar progressBar = (ProgressBar) parentView.findViewById(R.id.progressbar_moredata);
+        TextView loadingTv = (TextView) parentView.findViewById(R.id.tip_text_layout);
 
         progressBar.setVisibility(View.VISIBLE);
         loadingTv.setText(Contants.LoadView.LOADING);
@@ -45,8 +46,8 @@ public class ILoadViewImpl implements ILoadView, View.OnClickListener{
 
     @Override
     public void showErrorView(View parentView) {
-        ProgressBar progressBar = (ProgressBar) parentView.findViewById(com.voisd.sun.R.id.progressbar_moredata);
-        TextView loadingTv = (TextView) parentView.findViewById(com.voisd.sun.R.id.tip_text_layout);
+        ProgressBar progressBar = (ProgressBar) parentView.findViewById(R.id.progressbar_moredata);
+        TextView loadingTv = (TextView) parentView.findViewById(R.id.tip_text_layout);
 
         progressBar.setVisibility(View.GONE);
         loadingTv.setText(Contants.LoadView.CLICKLOAD);
@@ -56,8 +57,8 @@ public class ILoadViewImpl implements ILoadView, View.OnClickListener{
 
     @Override
     public void showFinishView(View parentView) {
-        ProgressBar progressBar = (ProgressBar) parentView.findViewById(com.voisd.sun.R.id.progressbar_moredata);
-        TextView loadingTv = (TextView) parentView.findViewById(com.voisd.sun.R.id.tip_text_layout);
+        ProgressBar progressBar = (ProgressBar) parentView.findViewById(R.id.progressbar_moredata);
+        TextView loadingTv = (TextView) parentView.findViewById(R.id.tip_text_layout);
         progressBar.setVisibility(View.GONE);
         loadingTv.setText("没数据了！");
     }

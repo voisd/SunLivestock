@@ -4,7 +4,7 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
-import com.voisd.sun.R;
+import com.bk886.njxzs.R;
 
 import java.io.File;
 
