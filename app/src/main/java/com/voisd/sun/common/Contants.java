@@ -89,14 +89,10 @@ public class Contants {
     }
 
     public static final class SMSS{
-        //此APPKEY仅供测试使用，且不定期失效，请到mob.com后台申请正式APPKEY
-        public final static String APPKEY_TEST = "f3fc6baa9ac4";
-        // 填写从短信SDK应用后台注册得到的APPSECRET
-        public final static String APPSECRET_TEST = "7f3dedcb36d92deebcb373af921d635a";
 
         //正式版本
-        public final static String APPKEY = "17b125854afcc";
-        public final static String APPSECRET = "d609da9e9cbfb9107361cb3b4d558c5c";
+        public final static String APPKEY = "17d5f9e8c238e";
+        public final static String APPSECRET = "56d4f67f19826f84b05ab619029e283e";
     }
 
 

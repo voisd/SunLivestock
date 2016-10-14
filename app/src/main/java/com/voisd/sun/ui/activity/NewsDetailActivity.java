@@ -182,8 +182,10 @@ public class NewsDetailActivity extends BaseActivity implements ICommonViewUi, S
             newsDetail = jsonHelper.getData(result, "data");
             initNewsDetail(newsDetail);
         } else if (ApiContants.EventTags.REPORTCOMMENT_DO == eventTag) {
-            showToastLong(HttpStatusUtil.getStatusDate(result));
-            CommonUtils.goActivity(mContext, NewsReplyListActivity.class, null);
+            showToastLong(HttpStatusUtil.getStatusMsg(result));
+            Bundle bundle = new Bundle();
+            bundle.putString("nid", nid);
+            CommonUtils.goActivity(mContext, NewsReplyListActivity.class, bundle);
         } else if (ApiContants.EventTags.COLLECTIONADD_DO == eventTag) {
             showToastLong(HttpStatusUtil.getStatusDate(result));
             newsCollectImg.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_selected));

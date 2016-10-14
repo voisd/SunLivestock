@@ -76,7 +76,7 @@ public class PassWorkActivity extends BaseActivity {
     @Override
     protected void initViewsAndEvents() {
         setToolbarTitle("修改密码");
-        SMSSDK.initSDK(this, Contants.SMSS.APPKEY_TEST,  Contants.SMSS.APPSECRET_TEST);
+        SMSSDK.initSDK(this, Contants.SMSS.APPKEY,  Contants.SMSS.APPSECRET);
         SMSSDK.registerEventHandler(eh); //注册短信回调
         passHandler = new PassHandler(this);
         passPhone.setText(PreferenceUtils.getPrefString(mContext, Contants.Preference.UserName,""));

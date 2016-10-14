@@ -57,6 +57,7 @@ import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 /**
  * Created by voisd on 2016/9/28.
@@ -250,6 +251,16 @@ public class NewsReplyChildsListActivity extends BaseActivity implements
         iRecyclerViewPresenter.loadData(Contants.HttpStatus.refresh_data, mContext, ApiContants.Urls.SUBCOMMENTLIST_DO, map);
     }
 
+    @OnClick(R.id.news_reply_cardView)
+    public void onclcik(){
+        if (!LoginMsgHelper.isLogin(this)) {
+            CommonUtils.goActivity(mContext, LoginActivity.class, null, false);
+            return;
+        }
+        replyPopupWindow.show(toolbarTopLayout);
+    }
+
+
     @Override
     public void toLoadMoreRequest() {
         if (isRequesting)
@@ -429,10 +440,10 @@ public class NewsReplyChildsListActivity extends BaseActivity implements
             RecyclerViewUtils.setHeaderView(recyclerView, topView);
         }
 
-        if(commentList!=null){
-
-            topHolder.replyReplyTv.performClick();
-        }
+//        if(commentList!=null){
+//
+//            topHolder.replyReplyTv.performClick();
+//        }
     }
 
 

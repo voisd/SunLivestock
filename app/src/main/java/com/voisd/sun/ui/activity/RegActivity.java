@@ -102,7 +102,7 @@ public class RegActivity extends BaseActivity implements ICommonViewUi {
         setToolbarTitle("用户注册");
         iCommonRequestPresenter = new CommonRequestPresenterImpl(mContext, this);
         regHandler = new RegHandler(this);
-        SMSSDK.initSDK(this, Contants.SMSS.APPKEY_TEST,  Contants.SMSS.APPSECRET_TEST);
+        SMSSDK.initSDK(this, Contants.SMSS.APPKEY,  Contants.SMSS.APPSECRET);
         SMSSDK.registerEventHandler(eh); //注册短信回调
     }
 

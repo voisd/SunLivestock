@@ -13,17 +13,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bk886.njxzs.R;
+import com.loopj.android.http.RequestParams;
 import com.voisd.sun.api.ApiContants;
 import com.voisd.sun.been.CommentList;
 import com.voisd.sun.been.News;
 import com.voisd.sun.been.PostResult;
+import com.voisd.sun.been.SubCommentList;
 import com.voisd.sun.common.Contants;
 import com.voisd.sun.common.EventBusTags;
 import com.voisd.sun.listeners.IRecyclerViewItemListener;
 import com.voisd.sun.listeners.LoadMoreClickListener;
 import com.voisd.sun.loading.ILoadView;
 import com.voisd.sun.loading.ILoadViewImpl;
+import com.voisd.sun.presenter.ICommonRequestPresenter;
 import com.voisd.sun.presenter.IRecyclerViewPresenter;
+import com.voisd.sun.presenter.impl.CommonRequestPresenterImpl;
 import com.voisd.sun.presenter.impl.RecyclerViewPresenterImpl;
 import com.voisd.sun.ui.adapter.HomeNewInformationAdapter;
 import com.voisd.sun.ui.adapter.NewsReplyListAdapter;
@@ -31,12 +35,16 @@ import com.voisd.sun.ui.base.BaseActivity;
 import com.voisd.sun.utils.AES;
 import com.voisd.sun.utils.CommonUtils;
 import com.voisd.sun.utils.JsonHelper;
+import com.voisd.sun.utils.LoginMsgHelper;
 import com.voisd.sun.utils.NetUtils;
+import com.voisd.sun.utils.StringHelper;
+import com.voisd.sun.utils.http.HttpStatusUtil;
 import com.voisd.sun.view.headerfooterrecyclerview.ExStaggeredGridLayoutManager;
 import com.voisd.sun.view.headerfooterrecyclerview.HeaderAndFooterRecyclerViewAdapter;
 import com.voisd.sun.view.headerfooterrecyclerview.HeaderSpanSizeLookup;
 import com.voisd.sun.view.headerfooterrecyclerview.OnRecyclerViewScrollListener;
 import com.voisd.sun.view.headerfooterrecyclerview.RecyclerViewUtils;
+import com.voisd.sun.view.iviews.ICommonViewUi;
 import com.voisd.sun.view.iviews.IRecyclerViewUi;
 
 import java.io.Serializable;
@@ -47,13 +55,15 @@ import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 /**
  * Created by voisd on 2016/9/28.
  * 联系方式：531972376@qq.com
  */
-public class NewsReplyListActivity extends BaseActivity implements
-        IRecyclerViewUi, IRecyclerViewItemListener, SwipeRefreshLayout.OnRefreshListener, LoadMoreClickListener {
+public class NewsReplyListActivity extends BaseActivity implements ICommonViewUi,
+        IRecyclerViewUi, IRecyclerViewItemListener, SwipeRefreshLayout.OnRefreshListener, LoadMoreClickListener,
+        ReplyPopupWindow.OnReplySubmitClickListener{
 
 
     @InjectView(R.id.toolbar_top_layout)
@@ -78,10 +88,16 @@ public class NewsReplyListActivity extends BaseActivity implements
     TextView refreshAgainTv;
     @InjectView(R.id.refresh_again_btn)
     CardView refreshAgainBtn;
+    @InjectView(R.id.news_reply_cardView)
+    CardView news_reply_cardView;
+
+    ReplyPopupWindow replyPopupWindow;
 
     private HeaderAndFooterRecyclerViewAdapter adapter;
     private ExStaggeredGridLayoutManager staggeredGridLayoutManager;
     private List<CommentList> mResultList = new ArrayList<CommentList>();
+
+    private List<CommentList> mResultListReport = new ArrayList<CommentList>();
 
     private IRecyclerViewPresenter iRecyclerViewPresenter = null;
 
@@ -94,6 +110,11 @@ public class NewsReplyListActivity extends BaseActivity implements
     private int mCurrentPage = 0;
 
     String nid;
+
+    String replyStr;
+
+    private ICommonRequestPresenter iCommonRequestPresenter = null;
+
 
     @Override
     protected boolean isBindEventBusHere() {
@@ -110,7 +131,11 @@ public class NewsReplyListActivity extends BaseActivity implements
         setToolbarTitle("评论列表");
         nid = getIntent().getExtras().getString("nid", "");
 
+        replyPopupWindow = new ReplyPopupWindow(this, this);
+
         iRecyclerViewPresenter = new RecyclerViewPresenterImpl(mContext, this);
+
+        iCommonRequestPresenter = new CommonRequestPresenterImpl(mContext, this);
 
         iLoadView = new ILoadViewImpl(mContext, this);
 
@@ -159,6 +184,15 @@ public class NewsReplyListActivity extends BaseActivity implements
         bundle.putString("root_parent_id",mResultList.get(position).getComment_id());
         bundle.putSerializable("commentList",(Serializable) mResultList.get(position));
         CommonUtils.goActivity(mContext,NewsReplyChildsListActivity.class,bundle,false);
+    }
+
+    @OnClick(R.id.news_reply_cardView)
+    public void onclick(){
+        if (!LoginMsgHelper.isLogin(this)) {
+            CommonUtils.goActivity(mContext, LoginActivity.class, null, false);
+            return;
+        }
+        replyPopupWindow.show(toolbarTopLayout);
     }
 
     @Override
@@ -249,6 +283,36 @@ public class NewsReplyListActivity extends BaseActivity implements
 
 
     @Override
+    public void toRequest(int eventTag) {
+        if(eventTag ==ApiContants.EventTags.REPORTCOMMENT_DO){
+            showProgress("评论...");
+            RequestParams requestParams = new RequestParams();
+            requestParams.put("content", AES.getSingleton().encrypt(replyStr));
+            requestParams.put("parent_id", AES.getSingleton().encrypt("0"));
+            requestParams.put("nid", AES.getSingleton().encrypt(nid));
+            iCommonRequestPresenter.request(eventTag, mContext, ApiContants.Urls.REPORTCOMMENT_DO, requestParams);
+        }
+    }
+
+
+    @Override
+    public void getRequestData(int eventTag, String result) {
+        showToastLong(HttpStatusUtil.getStatusMsg(result));
+        JsonHelper<CommentList> jsonHelper = new JsonHelper<CommentList>(CommentList.class);
+        CommentList commentList = jsonHelper.getData(result, "data");
+        if(commentList!=null){
+            mResultListReport.add(commentList);
+            mResultList.add(commentList);
+            adapter.notifyDataSetChanged();
+            if (mResultList.size() >= Contants.Request.PAGE_NUMBER) {
+                RecyclerViewUtils.setFooterView(recyclerView, loadMoreView);
+            }
+            recyclerView.scrollToPosition(mResultList.size());
+        }
+        showToastLong(HttpStatusUtil.getStatusMsg(result));
+    }
+
+    @Override
     public void onRequestSuccessException(int eventTag, String msg) {
         if (mCurrentPage > 0)
             mCurrentPage--;
@@ -276,9 +340,15 @@ public class NewsReplyListActivity extends BaseActivity implements
 
     @Override
     public void isRequesting(int eventTag, boolean status) {
-        isRequesting = status;
-        if (!status) {
-            swipeRefreshLayout.setRefreshing(false);
+        if (ApiContants.EventTags.REPORTCOMMENT_DO == eventTag) {
+            if (!status) {
+                dimissProgress();
+            }
+        }else {
+            isRequesting = status;
+            if (!status) {
+                swipeRefreshLayout.setRefreshing(false);
+            }
         }
     }
 
@@ -312,6 +382,13 @@ public class NewsReplyListActivity extends BaseActivity implements
         }
     }
 
+    @Override
+    public void OnSubmit(String str) {
+        if (!StringHelper.isEmpty(str)) {
+            replyStr = str;
+            toRequest(ApiContants.EventTags.REPORTCOMMENT_DO);
+        }
+    }
 
 
     public class MyScrollListener extends OnRecyclerViewScrollListener {

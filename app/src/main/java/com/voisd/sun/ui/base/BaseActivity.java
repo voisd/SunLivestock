@@ -81,7 +81,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUi, 
         mContext = this;
 
 
-        setupSystemBar();
+//        setupSystemBar();
 
         if (isBindEventBusHere()) {
             EventBus.getDefault().register(this);
