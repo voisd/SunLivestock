@@ -47,6 +47,8 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -123,9 +125,9 @@
             android:excludeFromRecents="true"
             />
         <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="561cae6ae0f55abd990035bf" >
+            android:name="UMENG_APPKEY" android:value="5809e09fb27b0a587c0040c4" >
         </meta-data>
+        <meta-data android:value="bk886" android:name="UMENG_CHANNEL"/>
 
         <!-- 短信-->
         <activity
@@ -133,6 +135,8 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="stateHidden|adjustResize"/>
+
+
 
     </application>
 

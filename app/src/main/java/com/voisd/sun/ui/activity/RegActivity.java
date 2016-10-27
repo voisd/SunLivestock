@@ -32,6 +32,7 @@ import com.voisd.sun.utils.JsonHelper;
 import com.voisd.sun.utils.PreferenceUtils;
 import com.voisd.sun.utils.StringHelper;
 import com.voisd.sun.utils.TimeUtils;
+import com.voisd.sun.utils.http.HttpStatusUtil;
 import com.voisd.sun.view.iviews.ICommonViewUi;
 
 import org.json.JSONArray;
@@ -41,6 +42,8 @@ import org.json.JSONObject;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -70,6 +73,8 @@ public class RegActivity extends BaseActivity implements ICommonViewUi {
     EditText regPhoneEt;
     @InjectView(R.id.reg_huoqu_cd)
     CardView regHuoquCd;
+    @InjectView(R.id.reg_huoqu_tv)
+    TextView regHuoquTv;
     @InjectView(R.id.reg_ems_et)
     EditText regEmsEt;
     @InjectView(R.id.reg_password_et)
@@ -156,13 +161,17 @@ public class RegActivity extends BaseActivity implements ICommonViewUi {
         System.out.println(result);
         switch (eventTag){
             case ApiContants.EventTags.CHECKPHONE:
+                if(HttpStatusUtil.getStatusDate(result).equals("true")){
+                    SMSSDK.getVerificationCode("86", regPhoneEt.getText().toString().trim(), new OnSendMessageHandler() {
+                        @Override
+                        public boolean onSendMessage(String s, String s1) {
+                            return false;
+                        }
+                    });
+                }else{
+                    showToastShort("该号码已注册");
+                }
 
-                SMSSDK.getVerificationCode("86", regPhoneEt.getText().toString().trim(), new OnSendMessageHandler() {
-                    @Override
-                    public boolean onSendMessage(String s, String s1) {
-                        return false;
-                    }
-                });
 
                 break;
             case ApiContants.EventTags.RANDOMNAME:
@@ -239,6 +248,8 @@ public class RegActivity extends BaseActivity implements ICommonViewUi {
             switch (msg.what){
                 case 1:
                     regSubmitCd.setCardBackgroundColor(getResources().getColor(R.color.theme_color));
+                    showToastShort("获取验证码成功");
+                    CountDown();
                     break;
                 case 2:
                     toRequest(ApiContants.EventTags.USERREGISTER);
@@ -258,9 +269,41 @@ public class RegActivity extends BaseActivity implements ICommonViewUi {
                         //do something
                     }
                     break;
+                case 4:
+//                    System.out.println("短信========"+(int)msg.obj);
+                    if ((int)msg.obj > 0) {
+                        regHuoquCd.setEnabled(false);
+                        regHuoquTv.setText("请稍候(" + (int)msg.obj  + "s)");
+                        regHuoquCd.setCardBackgroundColor(getResources().getColor(R.color.gray1));
+                    } else {
+                        second = 60;
+                        regHuoquTv.setText("获取验证码");
+                        regHuoquCd.setCardBackgroundColor(getResources().getColor(R.color.theme_color));
+                        regHuoquCd.setEnabled(true);
+                        if (timer != null) {
+                            timer.cancel();
+                        }
+                    }
+                    break;
             }
             super.handleMessage(msg);
         }
+    }
+
+    Timer timer;
+    int second = 60;
+    private void CountDown() {
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            // TimerTask 是个抽象类,实现的是Runable类
+            @Override
+            public void run() {
+                Message message = regHandler.obtainMessage();
+                message.what = 4;
+                message.obj = second--;
+                regHandler.sendMessage(message);
+            }
+        }, 0, 1000);
     }
 
     @Override

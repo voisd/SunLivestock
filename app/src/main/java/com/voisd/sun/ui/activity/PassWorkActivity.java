@@ -25,6 +25,8 @@ import com.voisd.sun.utils.StringHelper;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -60,6 +62,8 @@ public class PassWorkActivity extends BaseActivity {
     EditText passEmsEt;
     @InjectView(R.id.pass_next_cd)
     CardView passNextCd;
+    @InjectView(R.id.pass_huoqu_tv)
+    TextView passHuoquTv;
 
     PassHandler passHandler;
 
@@ -86,7 +90,7 @@ public class PassWorkActivity extends BaseActivity {
     public void onclcik(View view){
         switch (view.getId()){
             case R.id.pass_huoqu_cd:
-
+                showProgress("获取密码...");
                 SMSSDK.getVerificationCode("86", passPhone.getText().toString().trim(), new OnSendMessageHandler() {
                     @Override
                     public boolean onSendMessage(String s, String s1) {
@@ -153,9 +157,12 @@ public class PassWorkActivity extends BaseActivity {
                 return;
             switch (msg.what){
                 case 1:
+                    dimissProgress();
                     showToastShort("获取验证码成功");
                     passNextCd.setCardBackgroundColor(getResources().getColor(R.color.theme_color));
+                    CountDown();
                     break;
+
                 case 2:
                     dimissProgress();
                     CommonUtils.goActivity(mContext,PassWorkSubmitActivity.class,null,true);
@@ -176,10 +183,40 @@ public class PassWorkActivity extends BaseActivity {
                         //do something
                     }
                     break;
+                case 4:
+//                    System.out.println("短信========"+(int)msg.obj);
+                    if ((int)msg.obj > 0) {
+                        passHuoquCd.setEnabled(false);
+                        passHuoquTv.setText("请稍候(" + (int)msg.obj + "s)");
+                        passHuoquCd.setCardBackgroundColor(getResources().getColor(R.color.gray1));
+                    } else {
+                        second = 60;
+                        passHuoquTv.setText("获取验证码");
+                        passHuoquCd.setCardBackgroundColor(getResources().getColor(R.color.theme_color));
+                        passHuoquCd.setEnabled(true);
+                        if (timer != null) {
+                            timer.cancel();
+                        }
+                    }
+                    break;
             }
             super.handleMessage(msg);
         }
     }
-
+    Timer timer;
+    int second = 60;
+    private void CountDown() {
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            // TimerTask 是个抽象类,实现的是Runable类
+            @Override
+            public void run() {
+                Message message = passHandler.obtainMessage();
+                message.what = 4;
+                message.obj = second--;
+                passHandler.sendMessage(message);
+            }
+        }, 0, 1000);
+    }
 
 }

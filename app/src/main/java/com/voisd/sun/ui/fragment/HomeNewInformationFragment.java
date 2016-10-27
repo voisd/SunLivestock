@@ -140,7 +140,7 @@ public class HomeNewInformationFragment extends BaseFragment
             if (EventBusTags.HOME_CATEGORY_CHOOSE.equals(result.getTag())) {
                 category = (Category)result.getResult();
                 firstRefresh();
-                toolbarTitle.setText(category.getName());
+                toolbarTitle.setText(category.getName().equals("全部")?"农家小助手":category.getName());
             }
         }
     }

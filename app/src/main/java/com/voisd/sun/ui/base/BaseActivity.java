@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.bk886.njxzs.R;
+import com.umeng.analytics.MobclickAgent;
 import com.voisd.sun.common.Contants;
 import com.voisd.sun.ui.TestActivity;
 import com.voisd.sun.utils.CommonUtils;
@@ -162,13 +163,15 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUi, 
     @Override
     protected void onResume() {
         super.onResume();
-
+        MobclickAgent.onPageStart("SplashScreen");
+        MobclickAgent.onResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-
+        MobclickAgent.onPageEnd("SplashScreen");
+        MobclickAgent.onPause(this);
     }
 
     @Override

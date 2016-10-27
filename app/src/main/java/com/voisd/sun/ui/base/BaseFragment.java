@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.bk886.njxzs.R;
+import com.umeng.analytics.MobclickAgent;
 import com.voisd.sun.common.Contants;
 import com.voisd.sun.utils.CommonUtils;
 import com.voisd.sun.view.iviews.BaseUi;
@@ -160,6 +161,9 @@ public abstract class BaseFragment extends Fragment implements BaseUi, IPageStat
         if (getUserVisibleHint()) {
             onUserVisible();
         }
+
+
+        MobclickAgent.onPageStart("MainScreen");
     }
 
     @Override
@@ -168,6 +172,7 @@ public abstract class BaseFragment extends Fragment implements BaseUi, IPageStat
         if (getUserVisibleHint()) {
             onUserInvisible();
         }
+        MobclickAgent.onPageEnd("MainScreen");
     }
 
     @Override

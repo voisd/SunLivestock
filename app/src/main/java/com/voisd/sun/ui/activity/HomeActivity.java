@@ -126,10 +126,10 @@ public class HomeActivity extends BaseActivity implements ICommonViewUi {
 //        lp.setMargins(0,CommonUtils.getSysHeight(mContext),0,0);
 //        lp.gravity = Gravity.RIGHT;
 //        listView.setLayoutParams(lp);
-        Category category = new Category();
-        category.setCid("0");
-        category.setName("农家小助手");
-        categoryList.add(0,category);
+//        Category category = new Category();
+//        category.setCid("0");
+//        category.setName("农家小助手");
+//        categoryList.add(0,category);
         Ladapter ladapter = new Ladapter();
         listView.setAdapter(ladapter);
     }
